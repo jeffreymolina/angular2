@@ -1,0 +1,4 @@
+node_modules/
+.vs/angular2/v14/.suo
+.vs/config/applicationhost.config
+typings/

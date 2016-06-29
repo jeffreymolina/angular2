@@ -3,3 +3,10 @@
     <div>{{testItem.testItemName}}</div>
     <div>jeff was here</div>
 </li>
+<div>
+    <h2>Wikipedia Search</h2>
+    <input type="text" [ngFormControl]="term" />
+    <ul>
+        <li *ngFor="let item of items | async">{{item}}</li>
+    </ul>
+</div>

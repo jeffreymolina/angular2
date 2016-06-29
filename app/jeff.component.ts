@@ -4,8 +4,7 @@ import {TestItemService} from './testItemService';
 
 @Component({
   selector: 'jeff-component',
-  templateUrl: './jeff.component.html',
-  providers : [TestItemService]
+  templateUrl: './jeff.component.html'
 })
 export class JeffComponent implements OnInit {
     public constructor(private testItemService : TestItemService) {        

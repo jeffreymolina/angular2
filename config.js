@@ -5,17 +5,17 @@
   //map tells the System loader where to look for things
   var  map = {
     'app':                        'app',
-    '@angular':                   'https://npmcdn.com/@angular', // sufficient if we didn't pin the version
+    '@angular':                   'https://npmcdn.com/@angular', 
     '@angular/router':            'https://npmcdn.com/@angular/router' + routerVer,
     '@angular/forms':             'https://npmcdn.com/@angular/forms' + formsVer,
-    'angular2-in-memory-web-api': 'https://npmcdn.com/angular2-in-memory-web-api', // get latest
+    'angular2-in-memory-web-api': 'https://npmcdn.com/angular2-in-memory-web-api', 
     'rxjs':                       'https://npmcdn.com/rxjs@5.0.0-beta.6',
     'ts':                         'https://npmcdn.com/plugin-typescript@4.0.10/lib/plugin.js',
-    'typescript':                 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
+    'typescript': 'https://npmcdn.com/typescript@1.9.0-dev.20160409/lib/typescript.js'
  };
   //packages tells the System loader how to load when no filename and/or no extension
   var packages = {
-    'app':                        { main: 'app.ts',  defaultExtension: 'ts' },
+    'app':                        { main: 'app',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' }
   };
   var ngPackageNames = [
@@ -44,10 +44,9 @@
   });
   packages['@angular/router'] = { main: 'app.js', defaultExtension: 'js' };
   packages['@angular/forms'] = { main: 'app.js', defaultExtension: 'js' };
-  var config = {      
-transpiler:'ts',  
+  var config = {          
     typescriptOptions: {
-    tsconfig: true
+        tsconfig: true
     },
     meta: {
       'typescript': {
@@ -59,10 +58,3 @@ transpiler:'ts',
   };
   System.config(config);
 })(this);
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

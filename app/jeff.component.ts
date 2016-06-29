@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
-import {JeffComponent} from './jeff.component';
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  providers: [TestItemService],
-  directives: [JeffComponent]
+  selector: 'jeff-component',
+  templateUrl: './jeff.component.html',
+  providers : [TestItemService]
 })
-export class AppComponent implements OnInit {
+export class JeffComponent implements OnInit {
     public constructor(private testItemService : TestItemService) {        
     }
 

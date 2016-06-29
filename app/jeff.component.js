@@ -1,4 +1,4 @@
-System.register(['@angular/core', './testItemService', './jeff.component'], function(exports_1, context_1) {
+System.register(['@angular/core', './testItemService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, testItemService_1, jeff_component_1;
-    var AppComponent;
+    var core_1, testItemService_1;
+    var JeffComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -19,31 +19,27 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
             },
             function (testItemService_1_1) {
                 testItemService_1 = testItemService_1_1;
-            },
-            function (jeff_component_1_1) {
-                jeff_component_1 = jeff_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent(testItemService) {
+            JeffComponent = (function () {
+                function JeffComponent(testItemService) {
                     this.testItemService = testItemService;
                     this.testItems = [];
                 }
-                AppComponent.prototype.ngOnInit = function () {
+                JeffComponent.prototype.ngOnInit = function () {
                     this.testItems = this.testItemService.getTestItems();
                 };
-                AppComponent = __decorate([
+                JeffComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <jeff-component></jeff-component>\n  ",
-                        providers: [testItemService_1.TestItemService],
-                        directives: [jeff_component_1.JeffComponent]
+                        selector: 'jeff-component',
+                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n        <div>jeff was here</div>\n    </li>\n  ",
+                        providers: [testItemService_1.TestItemService]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService])
-                ], AppComponent);
-                return AppComponent;
+                ], JeffComponent);
+                return JeffComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("JeffComponent", JeffComponent);
         }
     }
 });

@@ -1,4 +1,4 @@
-System.register(['@angular/core'], function(exports_1, context_1) {
+System.register(['@angular/core', './testItemService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,42 +10,36 @@ System.register(['@angular/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
-    var AppComponent, TestItem;
+    var core_1, testItemService_1;
+    var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (testItemService_1_1) {
+                testItemService_1 = testItemService_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(testItemService) {
                     this.testItems = [];
+                    this.testItemService = testItemService;
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.testItems.push(new TestItem(1, "Test Item A"));
-                    this.testItems.push(new TestItem(2, "Test Item B"));
-                    this.testItems.push(new TestItem(3, "Test Item C"));
-                    this.testItems.push(new TestItem(4, "Test Item D"));
+                    this.testItems = this.testItemService.getTestItems();
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n    </li>\n  "
+                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n    </li>\n  ",
+                        providers: [testItemService_1.TestItemService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [testItemService_1.TestItemService])
                 ], AppComponent);
                 return AppComponent;
             }());
             exports_1("AppComponent", AppComponent);
-            TestItem = (function () {
-                function TestItem(id, name) {
-                    this.testItemName = name;
-                    this.testItemId = id;
-                }
-                return TestItem;
-            }());
-            exports_1("TestItem", TestItem);
         }
     }
 });

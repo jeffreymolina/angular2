@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import {TestItem} from './testItem';
+import {TestItemService} from './testItemService';
+
 @Component({
   selector: 'my-app',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  providers : [TestItemService]
 })
 export class AppComponent implements OnInit {
 
+    private testItemService: TestItemService;
+
+    public constructor(testItemService : TestItemService) {
+        this.testItemService = testItemService;
+    }
+
     public testItems: TestItem[] = [];
     ngOnInit() {
-        this.testItems.push(new TestItem(1, "Test Item A"));
-        this.testItems.push(new TestItem(2, "Test Item B"));
-        this.testItems.push(new TestItem(3, "Test Item C"));
-        this.testItems.push(new TestItem(4, "Test Item D"));
+        this.testItems = this.testItemService.getTestItems();
     }
-}
-
-export class TestItem {
-    constructor(id: number, name: string) {
-        this.testItemName = name;
-        this.testItemId = id;
-   }
-    public testItemName: string;
-    public testItemId: number;
 }

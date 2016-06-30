@@ -19,10 +19,19 @@ import {JSONP_PROVIDERS} from '@angular/http';
 export class JeffComponent implements OnInit {
     @Input() testItem: TestItem; 
     @Output() changed = new EventEmitter<TestItem>();   
-    private term = new Control();
+    private term = new Control();    
+    private items : any;
+
     public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {       
     }    
     ngOnInit() {        
+        this.items = this.term.valueChanges
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(term => this.wikipediaService.search(term));
+    }
+    
+    clear() {
         this.items = this.term.valueChanges
             .debounceTime(400)
             .distinctUntilChanged()

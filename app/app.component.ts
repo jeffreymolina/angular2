@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
 import {JeffComponent} from './jeff.component';
@@ -12,6 +12,7 @@ import {JeffComponent} from './jeff.component';
 export class AppComponent implements OnInit {
     selectedItem: TestItem;
     message: string;
+    @ViewChild(JeffComponent) jeffComponent : JeffComponent;
     public constructor(private testItemService : TestItemService) {        
     }
     public testItems: TestItem[] = [];
@@ -21,6 +22,9 @@ export class AppComponent implements OnInit {
     select(testItem: TestItem) {
         this.message = "";
         this.selectedItem = testItem;
+        if (this.jeffComponent) {
+            this.jeffComponent.clear();
+        }
     }
     subComponentChanged(testItem: TestItem) {
         if (testItem) {

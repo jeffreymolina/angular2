@@ -51,6 +51,13 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.wikipediaService.search(term); });
                 };
+                JeffComponent.prototype.clear = function () {
+                    var _this = this;
+                    this.items = this.term.valueChanges
+                        .debounceTime(400)
+                        .distinctUntilChanged()
+                        .switchMap(function (term) { return _this.wikipediaService.search(term); });
+                };
                 JeffComponent.prototype.invokeChangeEvent = function (testItem) {
                     this.changed.emit(testItem);
                 };

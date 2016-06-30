@@ -35,12 +35,19 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
                 AppComponent.prototype.select = function (testItem) {
                     this.message = "";
                     this.selectedItem = testItem;
+                    if (this.jeffComponent) {
+                        this.jeffComponent.clear();
+                    }
                 };
                 AppComponent.prototype.subComponentChanged = function (testItem) {
                     if (testItem) {
                         this.message = "jeff clicked " + testItem.testItemName + " in the subcomponent!";
                     }
                 };
+                __decorate([
+                    core_1.ViewChild(jeff_component_1.JeffComponent), 
+                    __metadata('design:type', jeff_component_1.JeffComponent)
+                ], AppComponent.prototype, "jeffComponent", void 0);
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',

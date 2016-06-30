@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/common', './testItemService', 'rxjs/add/operator/map', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/distinctUntilChanged', 'rxjs/add/operator/switchMap', './wikipediaService', '@angular/http'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/common', './testItem', './testItemService', 'rxjs/add/operator/map', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/distinctUntilChanged', 'rxjs/add/operator/switchMap', './wikipediaService', '@angular/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/common', './testItemService', 'rxjs/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, testItemService_1, wikipediaService_1, http_1;
+    var core_1, common_1, testItem_1, testItemService_1, wikipediaService_1, http_1;
     var JeffComponent;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['@angular/core', '@angular/common', './testItemService', 'rxjs/
             },
             function (common_1_1) {
                 common_1 = common_1_1;
+            },
+            function (testItem_1_1) {
+                testItem_1 = testItem_1_1;
             },
             function (testItemService_1_1) {
                 testItemService_1 = testItemService_1_1;
@@ -39,20 +42,22 @@ System.register(['@angular/core', '@angular/common', './testItemService', 'rxjs/
                     this.testItemService = testItemService;
                     this.wikipediaService = wikipediaService;
                     this.term = new common_1.Control();
-                    this.testItems = [];
                 }
                 JeffComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this.testItems = this.testItemService.getTestItems();
                     this.items = this.term.valueChanges
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.wikipediaService.search(term); });
                 };
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', testItem_1.TestItem)
+                ], JeffComponent.prototype, "testItem", void 0);
                 JeffComponent = __decorate([
                     core_1.Component({
                         selector: 'jeff-component',
-                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n        <div>jeff was here</div>\n    </li>\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
+                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <div>Detail</div>\n    <div>Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
                         providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])

@@ -10,11 +10,14 @@ import {JeffComponent} from './jeff.component';
   directives: [JeffComponent]
 })
 export class AppComponent implements OnInit {
+    selectedItem: TestItem;
     public constructor(private testItemService : TestItemService) {        
     }
-
     public testItems: TestItem[] = [];
     ngOnInit() {
         this.testItems = this.testItemService.getTestItems();
+    }
+    select(testItem: TestItem) {
+        this.selectedItem = testItem;
     }
 }

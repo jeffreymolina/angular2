@@ -1,5 +1,6 @@
 ﻿<h1>My First Angular 2 App.  Hello!</h1>
-<li *ngFor='let testItem of testItems'>
+<li *ngFor='let testItem of testItems'
+    (click)="select(testItem)">
     <div>{{testItem.testItemName}}</div>
 </li>
-<jeff-component></jeff-component>
+<jeff-component *ngIf="selectedItem" [testItem]="selectedItem"></jeff-component>

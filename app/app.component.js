@@ -32,10 +32,13 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
                 AppComponent.prototype.ngOnInit = function () {
                     this.testItems = this.testItemService.getTestItems();
                 };
+                AppComponent.prototype.select = function (testItem) {
+                    this.selectedItem = testItem;
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'>\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <jeff-component></jeff-component>\n  ",
+                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <jeff-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\"></jeff-component>\n  ",
                         providers: [testItemService_1.TestItemService],
                         directives: [jeff_component_1.JeffComponent]
                     }), 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Control} from '@angular/common';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
@@ -17,16 +17,11 @@ import {JSONP_PROVIDERS} from '@angular/http';
   providers: [WikipediaService, JSONP_PROVIDERS]
 })
 export class JeffComponent implements OnInit {
-
-    private items: Observable<Array<string>>;
+    @Input() testItem: TestItem;    
     private term = new Control();
-
     public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {       
-    }
-
-    public testItems: TestItem[] = [];
-    ngOnInit() {
-        this.testItems = this.testItemService.getTestItems();
+    }    
+    ngOnInit() {        
         this.items = this.term.valueChanges
             .debounceTime(400)
             .distinctUntilChanged()

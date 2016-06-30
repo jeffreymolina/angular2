@@ -1,8 +1,6 @@
 ﻿<h1>This is the Awesome Jeff Component</h1>
-<li *ngFor='let testItem of testItems'>
-    <div>{{testItem.testItemName}}</div>
-    <div>jeff was here</div>
-</li>
+<div>Detail</div>
+<div>Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>
 <div>
     <h2>Wikipedia Search</h2>
     <input type="text" [ngFormControl]="term" />

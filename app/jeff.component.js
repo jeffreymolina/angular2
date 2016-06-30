@@ -41,6 +41,7 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                 function JeffComponent(testItemService, wikipediaService) {
                     this.testItemService = testItemService;
                     this.wikipediaService = wikipediaService;
+                    this.changed = new core_1.EventEmitter();
                     this.term = new common_1.Control();
                 }
                 JeffComponent.prototype.ngOnInit = function () {
@@ -50,14 +51,21 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.wikipediaService.search(term); });
                 };
+                JeffComponent.prototype.invokeChangeEvent = function (testItem) {
+                    this.changed.emit(testItem);
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', testItem_1.TestItem)
                 ], JeffComponent.prototype, "testItem", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], JeffComponent.prototype, "changed", void 0);
                 JeffComponent = __decorate([
                     core_1.Component({
                         selector: 'jeff-component',
-                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <div>Detail</div>\n    <div>Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
+                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <div>Detail</div>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
                         providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])

@@ -33,12 +33,18 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
                     this.testItems = this.testItemService.getTestItems();
                 };
                 AppComponent.prototype.select = function (testItem) {
+                    this.message = "";
                     this.selectedItem = testItem;
+                };
+                AppComponent.prototype.subComponentChanged = function (testItem) {
+                    if (testItem) {
+                        this.message = "jeff clicked " + testItem.testItemName + " in the subcomponent!";
+                    }
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <jeff-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\"></jeff-component>\n  ",
+                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <br />\n    <strong>{{message}}</strong>\n    <br />\n    <jeff-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\" (changed)=\"subComponentChanged($event)\"></jeff-component>\n  ",
                         providers: [testItemService_1.TestItemService],
                         directives: [jeff_component_1.JeffComponent]
                     }), 

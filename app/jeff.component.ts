@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {Control} from '@angular/common';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
@@ -17,7 +17,8 @@ import {JSONP_PROVIDERS} from '@angular/http';
   providers: [WikipediaService, JSONP_PROVIDERS]
 })
 export class JeffComponent implements OnInit {
-    @Input() testItem: TestItem;    
+    @Input() testItem: TestItem; 
+    @Output() changed = new EventEmitter<TestItem>();   
     private term = new Control();
     public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {       
     }    
@@ -26,5 +27,9 @@ export class JeffComponent implements OnInit {
             .debounceTime(400)
             .distinctUntilChanged()
             .switchMap(term => this.wikipediaService.search(term));
+    }
+
+    invokeChangeEvent(testItem: TestItem) {
+        this.changed.emit(testItem);
     }
 }

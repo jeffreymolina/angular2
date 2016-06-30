@@ -11,6 +11,7 @@ import {JeffComponent} from './jeff.component';
 })
 export class AppComponent implements OnInit {
     selectedItem: TestItem;
+    message: string;
     public constructor(private testItemService : TestItemService) {        
     }
     public testItems: TestItem[] = [];
@@ -18,6 +19,12 @@ export class AppComponent implements OnInit {
         this.testItems = this.testItemService.getTestItems();
     }
     select(testItem: TestItem) {
+        this.message = "";
         this.selectedItem = testItem;
+    }
+    subComponentChanged(testItem: TestItem) {
+        if (testItem) {
+            this.message = `jeff clicked ${testItem.testItemName} in the subcomponent!`;
+        }
     }
 }

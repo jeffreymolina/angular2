@@ -1,6 +1,7 @@
 ﻿<h1>This is the Awesome Jeff Component</h1>
-<div>Detail</div>
+<strong>Detail</strong>
 <div (click)="invokeChangeEvent(testItem)">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>
+Name: <input type="text" [(ngModel)]="testItem.testItemName" />
 <div>
     <h2>Wikipedia Search</h2>
     <input type="text" [ngFormControl]="term" />

@@ -41,6 +41,7 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                 function JeffComponent(testItemService, wikipediaService) {
                     this.testItemService = testItemService;
                     this.wikipediaService = wikipediaService;
+                    this.testItem = null;
                     this.changed = new core_1.EventEmitter();
                     this.term = new common_1.Control();
                 }
@@ -72,7 +73,7 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                 JeffComponent = __decorate([
                     core_1.Component({
                         selector: 'jeff-component',
-                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <div>Detail</div>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
+                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <strong>Detail</strong>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    Name: <input type=\"text\" [(ngModel)]=\"testItem.testItemName\" />\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
                         providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])

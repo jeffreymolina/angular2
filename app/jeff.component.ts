@@ -17,7 +17,7 @@ import {JSONP_PROVIDERS} from '@angular/http';
   providers: [WikipediaService, JSONP_PROVIDERS]
 })
 export class JeffComponent implements OnInit {
-    @Input() testItem: TestItem; 
+    @Input() testItem: TestItem = null; 
     @Output() changed = new EventEmitter<TestItem>();   
     private term = new Control();    
     private items : any;

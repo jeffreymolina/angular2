@@ -1,4 +1,4 @@
-System.register(['@angular/core', './testItemService', './jeff.component'], function(exports_1, context_1) {
+System.register(['@angular/core', './testItemService', './sub.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, testItemService_1, jeff_component_1;
+    var core_1, testItemService_1, sub_component_1;
     var AppComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
             function (testItemService_1_1) {
                 testItemService_1 = testItemService_1_1;
             },
-            function (jeff_component_1_1) {
-                jeff_component_1 = jeff_component_1_1;
+            function (sub_component_1_1) {
+                sub_component_1 = sub_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -35,25 +35,25 @@ System.register(['@angular/core', './testItemService', './jeff.component'], func
                 AppComponent.prototype.select = function (testItem) {
                     this.message = "";
                     this.selectedItem = testItem;
-                    if (this.jeffComponent) {
-                        this.jeffComponent.clear();
+                    if (this.subComponent) {
+                        this.subComponent.clear();
                     }
                 };
                 AppComponent.prototype.subComponentChanged = function (testItem) {
                     if (testItem) {
-                        this.message = "jeff clicked " + testItem.testItemName + " in the subcomponent!";
+                        this.message = "Item description clicked " + testItem.testItemName + " in the subcomponent!";
                     }
                 };
                 __decorate([
-                    core_1.ViewChild(jeff_component_1.JeffComponent), 
-                    __metadata('design:type', jeff_component_1.JeffComponent)
-                ], AppComponent.prototype, "jeffComponent", void 0);
+                    core_1.ViewChild(sub_component_1.subComponent), 
+                    __metadata('design:type', sub_component_1.subComponent)
+                ], AppComponent.prototype, "subComponent", void 0);
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <br />\n    <strong>{{message}}</strong>\n    <br />\n    <jeff-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\" (changed)=\"subComponentChanged($event)\"></jeff-component>\n  ",
+                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <br />\n    <strong>{{message}}</strong>\n    <br />\n    <sub-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\" (changed)=\"subComponentChanged($event)\"></sub-component>\n  ",
                         providers: [testItemService_1.TestItemService],
-                        directives: [jeff_component_1.JeffComponent]
+                        directives: [sub_component_1.subComponent]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService])
                 ], AppComponent);

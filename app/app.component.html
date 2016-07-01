@@ -6,5 +6,5 @@
 <br />
 <strong>{{message}}</strong>
 <br />
-<jeff-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></jeff-component>
+<sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
 

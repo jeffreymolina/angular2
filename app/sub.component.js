@@ -11,7 +11,7 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, common_1, testItem_1, testItemService_1, wikipediaService_1, http_1;
-    var JeffComponent;
+    var subComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -37,50 +37,50 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                 http_1 = http_1_1;
             }],
         execute: function() {
-            JeffComponent = (function () {
-                function JeffComponent(testItemService, wikipediaService) {
+            subComponent = (function () {
+                function subComponent(testItemService, wikipediaService) {
                     this.testItemService = testItemService;
                     this.wikipediaService = wikipediaService;
                     this.testItem = null;
                     this.changed = new core_1.EventEmitter();
                     this.term = new common_1.Control();
                 }
-                JeffComponent.prototype.ngOnInit = function () {
+                subComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.items = this.term.valueChanges
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.wikipediaService.search(term); });
                 };
-                JeffComponent.prototype.clear = function () {
+                subComponent.prototype.clear = function () {
                     var _this = this;
                     this.items = this.term.valueChanges
                         .debounceTime(400)
                         .distinctUntilChanged()
                         .switchMap(function (term) { return _this.wikipediaService.search(term); });
                 };
-                JeffComponent.prototype.invokeChangeEvent = function (testItem) {
+                subComponent.prototype.invokeChangeEvent = function (testItem) {
                     this.changed.emit(testItem);
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', testItem_1.TestItem)
-                ], JeffComponent.prototype, "testItem", void 0);
+                ], subComponent.prototype, "testItem", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
-                ], JeffComponent.prototype, "changed", void 0);
-                JeffComponent = __decorate([
+                ], subComponent.prototype, "changed", void 0);
+                subComponent = __decorate([
                     core_1.Component({
-                        selector: 'jeff-component',
-                        template: "\n    <h1>This is the Awesome Jeff Component</h1>\n    <strong>Detail</strong>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    Name: <input type=\"text\" [(ngModel)]=\"testItem.testItemName\" />\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
+                        selector: 'sub-component',
+                        template: "\n    <h1>This is the Awesome sub Component</h1>\n    <strong>Detail</strong>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    Name: <input type=\"text\" [(ngModel)]=\"testItem.testItemName\" />\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
                         providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
                     }), 
                     __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])
-                ], JeffComponent);
-                return JeffComponent;
+                ], subComponent);
+                return subComponent;
             }());
-            exports_1("JeffComponent", JeffComponent);
+            exports_1("subComponent", subComponent);
         }
     }
 });

@@ -12,11 +12,11 @@ import {JSONP_PROVIDERS} from '@angular/http';
 
 
 @Component({
-  selector: 'jeff-component',
-  templateUrl: './jeff.component.html',
+  selector: 'sub-component',
+  templateUrl: './sub.component.html',
   providers: [WikipediaService, JSONP_PROVIDERS]
 })
-export class JeffComponent implements OnInit {
+export class subComponent implements OnInit {
     @Input() testItem: TestItem = null; 
     @Output() changed = new EventEmitter<TestItem>();   
     private term = new Control();    
@@ -32,6 +32,7 @@ export class JeffComponent implements OnInit {
     }
     
     clear() {
+        console.log('clear called');
         this.items = this.term.valueChanges
             .debounceTime(400)
             .distinctUntilChanged()

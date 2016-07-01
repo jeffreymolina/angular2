@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
-import {JeffComponent} from './jeff.component';
+import {subComponent} from './sub.component';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   providers: [TestItemService],
-  directives: [JeffComponent]
+  directives: [subComponent]
 })
 export class AppComponent implements OnInit {
     selectedItem: TestItem;
     message: string;
-    @ViewChild(JeffComponent) jeffComponent : JeffComponent;
+    @ViewChild(subComponent) sub : subComponent;
     public constructor(private testItemService : TestItemService) {        
     }
     public testItems: TestItem[] = [];
@@ -22,13 +22,13 @@ export class AppComponent implements OnInit {
     select(testItem: TestItem) {
         this.message = "";
         this.selectedItem = testItem;
-        if (this.jeffComponent) {
-            this.jeffComponent.clear();
+        if (this.sub) {
+            this.sub.clear();
         }
     }
     subComponentChanged(testItem: TestItem) {
         if (testItem) {
-            this.message = `jeff clicked ${testItem.testItemName} in the subcomponent!`;
+            this.message = `Item description clicked ${testItem.testItemName} in the subcomponent!`;
         }
     }
 }

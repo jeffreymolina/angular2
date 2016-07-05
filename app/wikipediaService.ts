@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {URLSearchParams, Jsonp} from '@angular/http';
+import {URLSearchParams, Jsonp, Response} from '@angular/http';
 
 @Injectable()
 export class WikipediaService {
@@ -12,6 +12,6 @@ export class WikipediaService {
         search.set('format', 'json');
         return this.jsonp
             .get('http://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK', { search })
-            .map((request) => request.json()[1]);
+            .map((response) => response.json()[1]);
     }
 }

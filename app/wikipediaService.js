@@ -21,25 +21,24 @@ System.register(['@angular/core', '@angular/http'], function(exports_1, context_
                 http_1 = http_1_1;
             }],
         execute: function() {
-            WikipediaService = (function () {
-                function WikipediaService(jsonp) {
+            let WikipediaService = class WikipediaService {
+                constructor(jsonp) {
                     this.jsonp = jsonp;
                 }
-                WikipediaService.prototype.search = function (term) {
+                search(term) {
                     var search = new http_1.URLSearchParams();
                     search.set('action', 'opensearch');
                     search.set('search', term);
                     search.set('format', 'json');
                     return this.jsonp
                         .get('http://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK', { search: search })
-                        .map(function (request) { return request.json()[1]; });
-                };
-                WikipediaService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Jsonp])
-                ], WikipediaService);
-                return WikipediaService;
-            }());
+                        .map((response) => response.json()[1]);
+                }
+            };
+            WikipediaService = __decorate([
+                core_1.Injectable(), 
+                __metadata('design:paramtypes', [http_1.Jsonp])
+            ], WikipediaService);
             exports_1("WikipediaService", WikipediaService);
         }
     }

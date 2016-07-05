@@ -37,49 +37,59 @@ System.register(['@angular/core', '@angular/common', './testItem', './testItemSe
                 http_1 = http_1_1;
             }],
         execute: function() {
-            subComponent = (function () {
-                function subComponent(testItemService, wikipediaService) {
+            let subComponent = class subComponent {
+                constructor(testItemService, wikipediaService) {
                     this.testItemService = testItemService;
                     this.wikipediaService = wikipediaService;
                     this.testItem = null;
                     this.changed = new core_1.EventEmitter();
                     this.term = new common_1.Control();
                 }
-                subComponent.prototype.ngOnInit = function () {
-                    var _this = this;
+                ngOnInit() {
                     this.items = this.term.valueChanges
                         .debounceTime(400)
                         .distinctUntilChanged()
-                        .switchMap(function (term) { return _this.wikipediaService.search(term); });
-                };
-                subComponent.prototype.clear = function () {
-                    var _this = this;
+                        .switchMap(term => this.wikipediaService.search(term));
+                }
+                clear() {
+                    console.log('clear called');
                     this.items = this.term.valueChanges
                         .debounceTime(400)
                         .distinctUntilChanged()
-                        .switchMap(function (term) { return _this.wikipediaService.search(term); });
-                };
-                subComponent.prototype.invokeChangeEvent = function (testItem) {
+                        .switchMap(term => this.wikipediaService.search(term));
+                }
+                invokeChangeEvent(testItem) {
                     this.changed.emit(testItem);
-                };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', testItem_1.TestItem)
-                ], subComponent.prototype, "testItem", void 0);
-                __decorate([
-                    core_1.Output(), 
-                    __metadata('design:type', Object)
-                ], subComponent.prototype, "changed", void 0);
-                subComponent = __decorate([
-                    core_1.Component({
-                        selector: 'sub-component',
-                        template: "\n    <h1>This is the Awesome sub Component</h1>\n    <strong>Detail</strong>\n    <div (click)=\"invokeChangeEvent(testItem)\">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>\n    Name: <input type=\"text\" [(ngModel)]=\"testItem.testItemName\" />\n    <div>\n        <h2>Wikipedia Search</h2>\n        <input type=\"text\" [ngFormControl]=\"term\" />\n        <ul>\n            <li *ngFor=\"let item of items | async\">{{item}}</li>\n        </ul>\n    </div>\n  ",
-                        providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
-                    }), 
-                    __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])
-                ], subComponent);
-                return subComponent;
-            }());
+                }
+            };
+            __decorate([
+                core_1.Input(), 
+                __metadata('design:type', testItem_1.TestItem)
+            ], subComponent.prototype, "testItem", void 0);
+            __decorate([
+                core_1.Output(), 
+                __metadata('design:type', Object)
+            ], subComponent.prototype, "changed", void 0);
+            subComponent = __decorate([
+                core_1.Component({
+                    selector: 'sub-component',
+                    template: `
+      <h1>This is the Awesome sub Component</h1>
+      <strong>Detail</strong>
+      <div (click)="invokeChangeEvent(testItem)">Name: {{testItem.testItemName}}, Id: {{testItem.testItemId}}</div>
+      Name: <input type="text" [(ngModel)]="testItem.testItemName" />
+      <div>
+          <h2>Wikipedia Search</h2>
+          <input type="text" [ngFormControl]="term" />
+          <ul>
+              <li *ngFor="let item of items | async">{{item}}</li>
+          </ul>
+      </div>
+    `,
+                    providers: [wikipediaService_1.WikipediaService, http_1.JSONP_PROVIDERS]
+                }), 
+                __metadata('design:paramtypes', [testItemService_1.TestItemService, wikipediaService_1.WikipediaService])
+            ], subComponent);
             exports_1("subComponent", subComponent);
         }
     }

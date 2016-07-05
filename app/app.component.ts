@@ -2,22 +2,25 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {TestItem} from './testItem';
 import {TestItemService} from './testItemService';
 import {subComponent} from './sub.component';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  providers: [TestItemService],
-  directives: [subComponent]
+    selector: 'my-app',
+    templateUrl: './app.component.html',
+    providers: [TestItemService],
+    directives: [subComponent]
 })
 export class AppComponent implements OnInit {
     selectedItem: TestItem;
     message: string;
-    @ViewChild(subComponent) sub : subComponent;
-    public constructor(private testItemService : TestItemService) {        
+    @ViewChild(subComponent) sub: subComponent;
+    public constructor(private testItemService: TestItemService) {
     }
-    public testItems: TestItem[] = [];
+
+    public testItems: TestItem[];
     ngOnInit() {
-        this.testItems = this.testItemService.getTestItems();
+        this.testItemService.getTestItems().subscribe(testItems => this.testItems = testItems,
+            error => this.message = error);
     }
     select(testItem: TestItem) {
         this.message = "";

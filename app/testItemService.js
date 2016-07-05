@@ -1,4 +1,4 @@
-System.register(['@angular/core', './testItem'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', 'rxjs/Rx', 'rxjs/add/operator/map', 'rxjs/add/operator/catch'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,34 +10,48 @@ System.register(['@angular/core', './testItem'], function(exports_1, context_1) 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, testItem_1;
+    var core_1, http_1, Rx_1;
     var TestItemService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (testItem_1_1) {
-                testItem_1 = testItem_1_1;
-            }],
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (Rx_1_1) {
+                Rx_1 = Rx_1_1;
+            },
+            function (_1) {},
+            function (_2) {}],
         execute: function() {
-            TestItemService = (function () {
-                function TestItemService() {
+            let TestItemService = class TestItemService {
+                constructor(_http) {
+                    this._http = _http;
                 }
-                TestItemService.prototype.getTestItems = function () {
-                    var testItems = [];
-                    testItems.push(new testItem_1.TestItem(1, "Test Item A"));
-                    testItems.push(new testItem_1.TestItem(2, "Test Item B"));
-                    testItems.push(new testItem_1.TestItem(3, "Test Item C"));
-                    testItems.push(new testItem_1.TestItem(4, "Test Item D"));
-                    return testItems;
-                };
-                TestItemService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
-                ], TestItemService);
-                return TestItemService;
-            }());
+                getTestItems() {
+                    return this._http.get("api/testItems.json")
+                        .map(this.extractData)
+                        .catch(this.handleError);
+                }
+                handleError(error) {
+                    // In a real world app, we might use a remote logging infrastructure
+                    // We'd also dig deeper into the error to get a better message
+                    let errMsg = (error.message) ? error.message :
+                        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+                    console.error(errMsg); // log to console instead
+                    return Rx_1.Observable.throw(errMsg);
+                }
+                extractData(res) {
+                    let body = res.json();
+                    return body.data || {};
+                }
+            };
+            TestItemService = __decorate([
+                core_1.Injectable(), 
+                __metadata('design:paramtypes', [http_1.Http])
+            ], TestItemService);
             exports_1("TestItemService", TestItemService);
         }
     }

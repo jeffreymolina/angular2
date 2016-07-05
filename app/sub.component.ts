@@ -12,25 +12,25 @@ import {JSONP_PROVIDERS} from '@angular/http';
 
 
 @Component({
-  selector: 'sub-component',
-  templateUrl: './sub.component.html',
-  providers: [WikipediaService, JSONP_PROVIDERS]
+    selector: 'sub-component',
+    templateUrl: './sub.component.html',
+    providers: [WikipediaService, JSONP_PROVIDERS]
 })
 export class subComponent implements OnInit {
-    @Input() testItem: TestItem = null; 
-    @Output() changed = new EventEmitter<TestItem>();   
-    private term = new Control();    
-    private items : any;
+    @Input() testItem: TestItem = null;
+    @Output() changed = new EventEmitter<TestItem>();
+    private term = new Control();
+    private items: any;
 
-    public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {       
-    }    
-    ngOnInit() {        
+    public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {
+    }
+    ngOnInit() {
         this.items = this.term.valueChanges
             .debounceTime(400)
             .distinctUntilChanged()
             .switchMap(term => this.wikipediaService.search(term));
     }
-    
+
     clear() {
         console.log('clear called');
         this.items = this.term.valueChanges

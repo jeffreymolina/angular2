@@ -24,41 +24,49 @@ System.register(['@angular/core', './testItemService', './sub.component'], funct
                 sub_component_1 = sub_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent(testItemService) {
+            let AppComponent = class AppComponent {
+                constructor(testItemService) {
                     this.testItemService = testItemService;
-                    this.testItems = [];
                 }
-                AppComponent.prototype.ngOnInit = function () {
-                    this.testItems = this.testItemService.getTestItems();
-                };
-                AppComponent.prototype.select = function (testItem) {
+                ngOnInit() {
+                    this.testItemService.getTestItems().subscribe(testItems => this.testItems = testItems, error => this.message = error);
+                }
+                select(testItem) {
                     this.message = "";
                     this.selectedItem = testItem;
-                    if (this.subComponent) {
-                        this.subComponent.clear();
+                    if (this.sub) {
+                        this.sub.clear();
                     }
-                };
-                AppComponent.prototype.subComponentChanged = function (testItem) {
+                }
+                subComponentChanged(testItem) {
                     if (testItem) {
-                        this.message = "Item description clicked " + testItem.testItemName + " in the subcomponent!";
+                        this.message = `Item description clicked ${testItem.testItemName} in the subcomponent!`;
                     }
-                };
-                __decorate([
-                    core_1.ViewChild(sub_component_1.subComponent), 
-                    __metadata('design:type', sub_component_1.subComponent)
-                ], AppComponent.prototype, "subComponent", void 0);
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: 'my-app',
-                        template: "\n    <h1>My First Angular 2 App.  Hello!</h1>\n    <li *ngFor='let testItem of testItems'\n        (click)=\"select(testItem)\">\n        <div>{{testItem.testItemName}}</div>\n    </li>\n    <br />\n    <strong>{{message}}</strong>\n    <br />\n    <sub-component *ngIf=\"selectedItem\" [testItem]=\"selectedItem\" (changed)=\"subComponentChanged($event)\"></sub-component>\n  ",
-                        providers: [testItemService_1.TestItemService],
-                        directives: [sub_component_1.subComponent]
-                    }), 
-                    __metadata('design:paramtypes', [testItemService_1.TestItemService])
-                ], AppComponent);
-                return AppComponent;
-            }());
+                }
+            };
+            __decorate([
+                core_1.ViewChild(sub_component_1.subComponent), 
+                __metadata('design:type', sub_component_1.subComponent)
+            ], AppComponent.prototype, "sub", void 0);
+            AppComponent = __decorate([
+                core_1.Component({
+                    selector: 'my-app',
+                    template: `
+      <h1>My First Angular 2 App.  Hello!</h1>
+      <li *ngFor='let testItem of testItems'
+          (click)="select(testItem)">
+          <div>{{testItem.testItemName}}</div>
+      </li>
+      <br />
+      <strong>{{message}}</strong>
+      <br />
+      <sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
+    `,
+                    providers: [testItemService_1.TestItemService],
+                    directives: [sub_component_1.subComponent]
+                }), 
+                __metadata('design:paramtypes', [testItemService_1.TestItemService])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
     }

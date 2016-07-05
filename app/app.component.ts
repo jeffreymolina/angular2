@@ -13,14 +13,12 @@ import { Observable } from 'rxjs/Rx';
 export class AppComponent implements OnInit {
     selectedItem: TestItem;
     message: string;
+    testItems: Observable<TestItem[]>; 
     @ViewChild(subComponent) sub: subComponent;
     public constructor(private testItemService: TestItemService) {
-    }
-
-    public testItems: TestItem[];
+    }    
     ngOnInit() {
-        this.testItemService.getTestItems().subscribe(testItems => this.testItems = testItems,
-            error => this.message = error);
+        this.testItems = this.testItemService.getTestItems();
     }
     select(testItem: TestItem) {
         this.message = "";

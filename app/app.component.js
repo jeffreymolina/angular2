@@ -29,7 +29,7 @@ System.register(['@angular/core', './testItemService', './sub.component'], funct
                     this.testItemService = testItemService;
                 }
                 ngOnInit() {
-                    this.testItemService.getTestItems().subscribe(testItems => this.testItems = testItems, error => this.message = error);
+                    this.testItems = this.testItemService.getTestItems();
                 }
                 select(testItem) {
                     this.message = "";
@@ -53,7 +53,7 @@ System.register(['@angular/core', './testItemService', './sub.component'], funct
                     selector: 'my-app',
                     template: `
       <h1>My First Angular 2 App.  Hello!</h1>
-      <li *ngFor='let testItem of testItems'
+      <li *ngFor='let testItem of testItems | async'
           (click)="select(testItem)">
           <div>{{testItem.testItemName}}</div>
       </li>

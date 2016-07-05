@@ -1,5 +1,5 @@
 ﻿<h1>My First Angular 2 App.  Hello!</h1>
-<li *ngFor='let testItem of testItems'
+<li *ngFor='let testItem of testItems | async'
     (click)="select(testItem)">
     <div>{{testItem.testItemName}}</div>
 </li>

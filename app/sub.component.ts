@@ -20,7 +20,7 @@ export class subComponent implements OnInit {
     @Input() testItem: TestItem = null;
     @Output() changed = new EventEmitter<TestItem>();
     private term = new Control();
-    private items: any;
+    private items: Observable<any>;
 
     public constructor(private testItemService: TestItemService, private wikipediaService: WikipediaService) {
     }

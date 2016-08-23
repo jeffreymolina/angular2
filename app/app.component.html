@@ -6,5 +6,7 @@
 <br />
 <strong>{{message}}</strong>
 <br />
-<sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
+<div style="border:solid">
+    <sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
+</div>
 

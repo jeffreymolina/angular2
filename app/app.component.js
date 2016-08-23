@@ -60,7 +60,9 @@ System.register(['@angular/core', './testItemService', './sub.component'], funct
       <br />
       <strong>{{message}}</strong>
       <br />
-      <sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
+      <div style="border:solid">
+          <sub-component *ngIf="selectedItem" [testItem]="selectedItem" (changed)="subComponentChanged($event)"></sub-component>
+      </div>
     `,
                     providers: [testItemService_1.TestItemService],
                     directives: [sub_component_1.subComponent]
